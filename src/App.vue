@@ -17,5 +17,6 @@ export default {
 <style lang="scss">
   body{
     margin: 0;
+    font-family: 'Poppins';
   }
 </style>

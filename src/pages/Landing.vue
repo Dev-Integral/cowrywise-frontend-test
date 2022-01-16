@@ -29,9 +29,11 @@ export default {
       align-items: center;
       background: #fff;
       height: 30px;
-      width: 90vw;
+      width: 80vw;
       padding: 5px 15px;
       border-radius: 8px;
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.05),
+        0 6px 20px 0 rgba(0, 0, 0, 0.005);
 
       .fa-search-holder {
         margin-right: 10px;
