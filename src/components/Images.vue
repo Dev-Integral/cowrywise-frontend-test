@@ -119,7 +119,7 @@ export default {
   .grid-images {
     gap: 20px;
   }
-	.image-card {
+  .image-card {
     height: 250px;
     h4 {
       margin: 0;
@@ -131,12 +131,56 @@ export default {
       bottom: 10px;
       left: 10px;
     }
+    #item-1 {
+      height: 100%;
+    }
   }
 }
 @media only screen and (max-width: 767px) {
   .grid-images {
     grid-template-columns: 1fr 1fr;
-    gap: 10px;
+  }
+  #item-0 {
+    height: 80%;
+  }
+  #item-1 {
+    height: 100%;
+  }
+  #item-2 {
+    height: 100%;
+    bottom: 18%;
+  }
+  #item-3 {
+    bottom: 0%;
+    height: 100%;
+  }
+  #item-4 {
+    bottom: 20%;
+  }
+  #item-5 {
+    bottom: 0%;
   }
 }
-</style> scoped>
+@media only screen and (max-width: 565px) {
+  .grid-images {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  #item {
+    &-0
+   {
+      height: 100%;
+    }
+  }
+	#item-3 {
+      height: 100%;
+    }
+  #item-4,
+  #item-2 {
+    bottom: 0;
+  }
+  #item {
+    bottom: 0;
+  }
+}
+</style>
