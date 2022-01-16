@@ -11,8 +11,20 @@
 
 
 <script>
+import axios from 'axios';
+
 export default {
   name: "Images",
+  data(){
+      return({info: '',})
+  },
+  mounted () {
+    axios
+      .get('https://api.unsplash.com/photos?count=6')
+      .then(response => {
+          console.log(response);
+          this.info = response})
+  }
 };
 </script>
 
