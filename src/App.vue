@@ -31,11 +31,11 @@ export default {
     },
     async getList(link) {
       this.loading = false;
-
+      console.log(process.env.VUE_APP_ACCESS_KEY);
       await axios
         .create({
           headers: {
-            Authorization: `Client-ID estcMmHOEb9W3QUAoPQqjpEP_YhBJI7v7ey8RCtnJhE`,
+            Authorization: `Client-ID ${process.env.VUE_APP_ACCESS_KEY}`,
           },
         })
         .get(link)
