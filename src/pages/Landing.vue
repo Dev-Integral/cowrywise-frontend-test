@@ -18,21 +18,21 @@
     />
   </div>
   <div v-else>
-    <Loader/>
+    <Loader />
   </div>
   <div v-if="showModal">
-    <ImageModal />
+    <ImageModal v-bind:modalData="modalData" v-on:close="showModal=false" />
   </div>
 </template>
 
 <script>
 import Images from "../components/Images.vue";
-import ImageModal from "../components/Images.vue";
+import ImageModal from "../components/ImageModal.vue";
 import Loader from "../components/Loader.vue";
 
 export default {
   name: "Landing",
-  emits: ["searchTerm", "setLoadingToFalse"],
+  emits: ["searchTerm"],
   props: ["imageList", "loading"],
   components: { Images, ImageModal, Loader },
   data() {
@@ -44,10 +44,10 @@ export default {
   },
   methods: {
     imageData(data) {
-      this.$emit("setLoadingToFalse");
+      // this.$emit("setLoadingToFalse");
+      console.log(this.modalData);
       this.modalData = data;
       this.showModal = true;
-      console.log(this.modalData);
     },
     searchTerm() {
       this.$emit("searchTerm", this.searchText);

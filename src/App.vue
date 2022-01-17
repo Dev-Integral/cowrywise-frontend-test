@@ -4,7 +4,6 @@
       v-bind:imageList="imageList"
       v-bind:loading="loading"
       v-on:searchTerm="searchTextFxn"
-      v-on:setLoadingToFalse="setLoadingToFalse"
     />
   </div>
 </template>
@@ -29,9 +28,6 @@ export default {
       return text
         ? this.getList(`https://api.unsplash.com/search/photos?&query=${text}`)
         : null;
-    },
-    setLoadingToFalse(){
-      this.loading = false;
     },
     async getList(link) {
       this.loading = false;
