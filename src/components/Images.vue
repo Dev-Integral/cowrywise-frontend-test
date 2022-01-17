@@ -53,14 +53,22 @@ export default {
 #item-0 {
   height: 70%;
 }
+#item-4{
+  height: 100%;
+  // bottom: 30%;
+}
 #item-2 {
   height: 80%;
+}
+#item-1{
+  height: 100%;
 }
 #item-3 {
   bottom: 30%;
 }
 #item-5 {
   bottom: 20%;
+  height: 100%;
 }
 
 .image-card {
@@ -118,9 +126,6 @@ export default {
     .user-details {
       bottom: 10px;
       left: 10px;
-    }
-    #item-1 {
-      height: 100%;
     }
   }
 }

@@ -1,6 +1,6 @@
 <template>
   <div class="modal-container">
-    <div class="modal-content">
+    <div class="modal-content" v-bind:class="{ hide: !show }">
       <div class="close-icon" @click="$emit('close')">
         <i class="fa fa-times"></i>
       </div>
@@ -12,6 +12,15 @@
         <p>{{ modalData.location }}</p>
       </div>
     </div>
+    <div class="modal-content" v-bind:class="{ hide: show }">
+      <div class="img-holder loading-background">
+        <div class="loading-text">
+          <p>Please wait</p>
+          <div v-bind:class="{ loading: !show }"></div>
+        </div>
+      </div>
+      <div class="details"></div>
+    </div>
   </div>
 </template>
 
@@ -20,10 +29,19 @@ export default {
   name: "ImageModal",
   props: ["modalData"],
   emits: ["close"],
+  data() {
+    return { show: false };
+  },
+  mounted() {
+    setTimeout(() => (this.show = true), 5000);
+  },
 };
 </script>
 
 <style lang="scss">
+.hide {
+  display: none;
+}
 .modal {
   &-container {
     position: absolute;
@@ -60,8 +78,10 @@ export default {
   width: 70%;
   height: 80%;
   padding: 0;
-    margin: 0 auto;
-    margin-top: 20px;
+  margin: 0 auto;
+  margin-top: 20px;
+  border-radius: 10px 10px 0 0;
+
   img {
     margin: 0;
     padding: 0;
@@ -86,12 +106,83 @@ export default {
     padding-left: 60px;
     color: #253858;
   }
-  h3{
-      padding-top: 30px;
+  h3 {
+    padding-top: 30px;
   }
-  p{
-      padding-bottom: 20px;
-      padding-top: 10px;
+  p {
+    padding-bottom: 20px;
+    padding-top: 10px;
+  }
+}
+
+// PLEASE WAIT
+@keyframes buttonLoadingSpinner {
+  from {
+    transform: rotate(0turn);
+  }
+  to {
+    transform: rotate(1turn);
+  }
+}
+.loading-background {
+  background: #ddd;
+}
+.loading-text {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  top: 35%;
+  left: 45%;
+  color: #fff;
+  justify-content: center;
+
+  p {
+    margin-left: 8px;
+  }
+}
+
+.loading::after {
+  content: "";
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  border: 4px solid transparent;
+  border-top-color: #eee;
+  border-right-color: #ddd;
+  border-radius: 50%;
+  animation: buttonLoadingSpinner 1s linear infinite;
+}
+@media only screen and (max-width: 767px) {
+  .modal-container {
+    height: 200vh;
+
+    .img-holder {
+      width: 100%;
+    }
+    .details{
+      width: 100%;
+    }
+    .loading-text {
+      left: 40%;
+    }
+  }
+}
+@media only screen and (max-width: 565px) {
+  .modal-container {
+    height: 300vh;
+    .loading-text {
+      left: 30%;
+    }
+    .details{
+      p, h3{
+        padding-left: 20px;
+      }
+    }
   }
 }
 </style>

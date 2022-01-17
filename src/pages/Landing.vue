@@ -44,8 +44,6 @@ export default {
   },
   methods: {
     imageData(data) {
-      // this.$emit("setLoadingToFalse");
-      console.log(this.modalData);
       this.modalData = data;
       this.showModal = true;
     },

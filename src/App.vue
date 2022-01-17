@@ -60,8 +60,7 @@ export default {
           this.imageList = initialData;
           return this.imageList;
         })
-        .catch((error) => {
-          console.log({ error });
+        .catch(() => {
           this.loading = false;
         });
     },
