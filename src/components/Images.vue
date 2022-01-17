@@ -1,8 +1,9 @@
 <template>
-  <div class="grid-images" v-if="ImageData">
+<div>
+  <div class="grid-images" v-if="imageList && !loading">
     <div
       class="item"
-      v-for="(image, index) in ImageData"
+      v-for="(image, index) in imageList"
       v-bind:key="index"
       @click="$emit('showModal', image)"
     >
@@ -19,37 +20,32 @@
       </div>
     </div>
   </div>
+	<div v-else class="loader-container" >
+		<Loader id="item-0" />
+		<Loader id="item-1"/>
+		<Loader id="item-2"/>
+		<Loader id="item-3"/>
+		<Loader id="item-4"/>
+		<Loader id="item-5"/>
+	</div>
+</div>
 </template>
 
 
 <script>
-import axios from "axios";
-
+import Loader from './Loader.vue';
 export default {
   name: "Images",
+  emits: ["showModal"],
+	props: ["imageList", "loading"],
+	components: {Loader},
   data() {
-    return { ImageData: [] };
+    return {  };
   },
-  async beforeMount() {
-    await axios
-      .create({
-        headers: {
-          Authorization: `Client-ID estcMmHOEb9W3QUAoPQqjpEP_YhBJI7v7ey8RCtnJhE`,
-        },
-      })
-      .get("https://api.unsplash.com/photos?limit=6")
-      .then((response) => {
-        let data = response.data;
-        data.forEach((element, index) => {
-          index < 6
-            ? this.ImageData.push({ ...element.urls, ...element.user })
-            : null;
-        });
-        console.log(this.ImageData);
-
-        return this.ImageData;
-      });
-  },
+	mounted() {
+		// this.ImageData = this.imageList;
+		// console.log(this.loading);
+	}
 };
 </script>
 
@@ -77,9 +73,19 @@ export default {
 #item-5 {
   bottom: 20%;
 }
+.loader-container{
+	position: relative;
+	display: grid;
+	width: 70vw;
+	margin: 0 auto;
+	gap: 30px;
+	grid-template-columns: 1fr 1fr 1fr;
+	z-index: 5;
+}
 .image-card {
   position: relative;
   height: 350px;
+  cursor: pointer;
 
   img {
     margin: 0;
@@ -107,20 +113,21 @@ export default {
     height: 40%;
     z-index: 3;
     background-color: transparent;
-    // opacity: 0.8;
     background: linear-gradient(to top, rgba(10, 32, 10, 0.4), transparent);
-    // background: linear-gradient(1deg, #000e 0.0005%, transparent);
     position: absolute;
     bottom: 0;
     border-radius: 10px;
   }
 }
+.image-card:hover .veil {
+  height: 100%;
+  background: linear-gradient(to top, rgba(10, 32, 10, 0.9), transparent);
+}
 @media only screen and (max-width: 900px) {
-  .grid-images {
+  .grid-images, .loader-container {
     gap: 20px;
   }
   .image-card {
-    height: 250px;
     h4 {
       margin: 0;
     }
@@ -137,7 +144,7 @@ export default {
   }
 }
 @media only screen and (max-width: 767px) {
-  .grid-images {
+  .grid-images, .loader-container {
     grid-template-columns: 1fr 1fr;
   }
   #item-0 {
@@ -162,19 +169,18 @@ export default {
   }
 }
 @media only screen and (max-width: 565px) {
-  .grid-images {
+  .grid-images, .loader-container {
     grid-template-columns: 1fr;
     gap: 10px;
   }
   #item {
-    &-0
-   {
+    &-0 {
       height: 100%;
     }
   }
-	#item-3 {
-      height: 100%;
-    }
+  #item-3 {
+    height: 100%;
+  }
   #item-4,
   #item-2 {
     bottom: 0;

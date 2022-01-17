@@ -1,18 +1,41 @@
 <template>
   <div class="landing-banner-container">
-    <div class="searchbox-holder">
+    <div class="searchbox-holder" >
       <div class="fa-search-holder"><i class="fa fa-search"></i></div>
-      <input type="text" placeholder="Search for photo" />
+      <input type="text" placeholder="Search for photo" @change="searchTerm" v-model="searchText" />
     </div>
   </div>
-  <Images />
+  <Images v-on:showModal="imageData" v-bind:loading="loading" v-bind:imageList="imageList" />
+  <div v-if="showModal"><ImageModal /></div>
 </template>
 
 <script>
 import Images from "../components/Images.vue";
+import ImageModal from "../components/Images.vue";
+
 export default {
   name: "Landing",
-  components: { Images },
+  emits: ['showModal', 'searchTerm'],
+  props: ['imageList', 'loading'],
+  components: { Images, ImageModal },
+  data() {
+    return {
+      searchText: "",
+      showModal: false,
+      modalData: {}
+    };
+  },
+  methods: {
+    imageData(data){
+      // this.$emit('showModal', data);
+      this.modalData = data;
+      this.showModal = true;
+    },
+    searchTerm(){
+      this.$emit('searchTerm', this.searchText);
+    }
+  },
+  
 };
 </script>
 
