@@ -1,41 +1,58 @@
 <template>
   <div class="landing-banner-container">
-    <div class="searchbox-holder" >
+    <div class="searchbox-holder">
       <div class="fa-search-holder"><i class="fa fa-search"></i></div>
-      <input type="text" placeholder="Search for photo" @change="searchTerm" v-model="searchText" />
+      <input
+        type="text"
+        placeholder="Search for photo"
+        @change="searchTerm"
+        v-model="searchText"
+      />
     </div>
   </div>
-  <Images v-on:showModal="imageData" v-bind:loading="loading" v-bind:imageList="imageList" />
-  <div v-if="showModal"><ImageModal /></div>
+  <div v-if="imageList && !loading">
+    <Images
+      v-on:showModal="imageData"
+      v-bind:loading="loading"
+      v-bind:imageList="imageList"
+    />
+  </div>
+  <div v-else>
+    <Loader/>
+  </div>
+  <div v-if="showModal">
+    <ImageModal />
+  </div>
 </template>
 
 <script>
 import Images from "../components/Images.vue";
 import ImageModal from "../components/Images.vue";
+import Loader from "../components/Loader.vue";
 
 export default {
   name: "Landing",
-  emits: ['showModal', 'searchTerm'],
-  props: ['imageList', 'loading'],
-  components: { Images, ImageModal },
+  emits: ["searchTerm", "setLoadingToFalse"],
+  props: ["imageList", "loading"],
+  components: { Images, ImageModal, Loader },
   data() {
     return {
       searchText: "",
       showModal: false,
-      modalData: {}
+      modalData: {},
     };
   },
   methods: {
-    imageData(data){
-      // this.$emit('showModal', data);
+    imageData(data) {
+      this.$emit("setLoadingToFalse");
       this.modalData = data;
       this.showModal = true;
+      console.log(this.modalData);
     },
-    searchTerm(){
-      this.$emit('searchTerm', this.searchText);
-    }
+    searchTerm() {
+      this.$emit("searchTerm", this.searchText);
+    },
   },
-  
 };
 </script>
 

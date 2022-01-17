@@ -1,6 +1,6 @@
 <template>
 <div>
-  <div class="grid-images" v-if="imageList && !loading">
+  <div class="grid-images">
     <div
       class="item"
       v-for="(image, index) in imageList"
@@ -20,32 +20,21 @@
       </div>
     </div>
   </div>
-	<div v-else class="loader-container" >
-		<Loader id="item-0" />
-		<Loader id="item-1"/>
-		<Loader id="item-2"/>
-		<Loader id="item-3"/>
-		<Loader id="item-4"/>
-		<Loader id="item-5"/>
-	</div>
+	
 </div>
 </template>
 
 
 <script>
-import Loader from './Loader.vue';
+// import Loader from './Loader.vue';
 export default {
   name: "Images",
   emits: ["showModal"],
 	props: ["imageList", "loading"],
-	components: {Loader},
+	// components: {Loader},
   data() {
     return {  };
-  },
-	mounted() {
-		// this.ImageData = this.imageList;
-		// console.log(this.loading);
-	}
+  }
 };
 </script>
 
@@ -73,15 +62,7 @@ export default {
 #item-5 {
   bottom: 20%;
 }
-.loader-container{
-	position: relative;
-	display: grid;
-	width: 70vw;
-	margin: 0 auto;
-	gap: 30px;
-	grid-template-columns: 1fr 1fr 1fr;
-	z-index: 5;
-}
+
 .image-card {
   position: relative;
   height: 350px;
@@ -124,7 +105,7 @@ export default {
   background: linear-gradient(to top, rgba(10, 32, 10, 0.9), transparent);
 }
 @media only screen and (max-width: 900px) {
-  .grid-images, .loader-container {
+  .grid-images {
     gap: 20px;
   }
   .image-card {
@@ -144,7 +125,7 @@ export default {
   }
 }
 @media only screen and (max-width: 767px) {
-  .grid-images, .loader-container {
+  .grid-images {
     grid-template-columns: 1fr 1fr;
   }
   #item-0 {
@@ -155,14 +136,14 @@ export default {
   }
   #item-2 {
     height: 100%;
-    bottom: 18%;
+    bottom: 10%;
   }
   #item-3 {
     bottom: 0%;
     height: 100%;
   }
   #item-4 {
-    bottom: 20%;
+    bottom: 10%;
   }
   #item-5 {
     bottom: 0%;
