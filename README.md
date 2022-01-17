@@ -1,6 +1,9 @@
 # cowrywise-frontend-test
 ### Current Deployment State
 [![Netlify Status](https://api.netlify.com/api/v1/badges/dd58b94f-fe70-4d33-ac6f-60f3ba3c612a/deploy-status)](https://app.netlify.com/sites/dev-integral-4-cowrywise/deploys)
+
+### Visit site
+[!live preview](https://dev-integral-4-cowrywise.netlify.app)
 ## Project setup
 ```
 yarn install
