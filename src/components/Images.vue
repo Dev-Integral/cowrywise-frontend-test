@@ -1,26 +1,26 @@
 <template>
-<div>
-  <transition-group class="grid-images" tag="div" name="image" appear>
-    <div
-      class="item"
-      v-for="(image, index) in imageList"
-      v-bind:key="index"
-      @click="$emit('showModal', image)"
-    >
-      <div class="image-card" :id="`item-${index}`">
-        <img v-bind:src="image['small']" />
-        <div class="veil"></div>
-        <div class="user-details">
-          <h4>{{ image.first_name }} {{ image.last_name }}</h4>
-          <div>
-            <p v-if="image.location">{{ image.location }}</p>
-            <p v-else>N/A</p>
+  <div>
+    <transition-group class="grid-images" tag="div" name="image" appear>
+      <div
+        class="item"
+        v-for="(image, index) in imageList"
+        v-bind:key="index"
+        @click="$emit('showModal', image)"
+      >
+        <div class="image-card" :id="`item-${index}`">
+          <img v-bind:src="image['small']" />
+          <div class="veil"></div>
+          <div class="user-details">
+            <h4>{{ image.first_name }} {{ image.last_name }}</h4>
+            <div>
+              <p v-if="image.location">{{ image.location }}</p>
+              <p v-else>N/A</p>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </transition-group>	
-</div>
+    </transition-group>
+  </div>
 </template>
 
 
@@ -28,33 +28,33 @@
 export default {
   name: "Images",
   emits: ["showModal"],
-	props: ["imageList", "loading"],
+  props: ["imageList", "loading"],
   data() {
-    return {  };
-  }
+    return {};
+  },
 };
 </script>
 
 <style lang="scss" scoped>
-@import '../assets/scss/colors';
-.image-enter-from{
+@import "../assets/scss/colors";
+.image-enter-from {
   opacity: 0;
   transform: scale(0.6);
 }
-.image-enter-to{
+.image-enter-to {
   opacity: 1;
-  transform: scale(1);  
+  transform: scale(1);
 }
-.image-enter-active{
+.image-enter-active {
   transition: all 1s ease;
 }
-.image-leave-from{
+.image-leave-from {
   opacity: 1;
 }
-.image-leave-to{
+.image-leave-to {
   opacity: 0;
 }
-.image-leave-active{
+.image-leave-active {
   transition: all 1s ease;
 }
 
@@ -72,14 +72,13 @@ export default {
 #item-0 {
   height: 70%;
 }
-#item-4{
+#item-4 {
   height: 100%;
-  // bottom: 30%;
 }
 #item-2 {
   height: 80%;
 }
-#item-1{
+#item-1 {
   height: 100%;
 }
 #item-3 {
@@ -88,6 +87,10 @@ export default {
 #item-5 {
   bottom: 20%;
   height: 100%;
+}
+#item-6 {
+  height: 100%;
+  bottom: 30%;
 }
 
 .image-card {
@@ -172,9 +175,13 @@ export default {
   #item-5 {
     bottom: 0%;
   }
+  #item-6 {
+  bottom: 10%;
+}
 }
 @media only screen and (max-width: 565px) {
-  .grid-images, .loader-container {
+  .grid-images,
+  .loader-container {
     grid-template-columns: 1fr;
     gap: 10px;
   }
@@ -190,7 +197,7 @@ export default {
   #item-2 {
     bottom: 0;
   }
-  #item {
+  #item-6 {
     bottom: 0;
   }
 }

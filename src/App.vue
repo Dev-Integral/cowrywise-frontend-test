@@ -46,13 +46,13 @@ export default {
 
           if (data.results) {
             data.results.forEach((element, index) => {
-              index < 6
+              index < 7
                 ? initialData.push({ ...element.urls, ...element.user })
                 : null;
             });
           } else if(data) {
             data.forEach((element, index) => {
-              index < 6
+              index < 8
                 ? initialData.push({ ...element.urls, ...element.user })
                 : null;
             });
@@ -67,7 +67,7 @@ export default {
     },
   },
   async beforeMount() {
-    this.getList(`https://api.unsplash.com/photos`);
+    this.getList(`https://api.unsplash.com/search/photos?&query=african`);
   },
 };
 </script>
