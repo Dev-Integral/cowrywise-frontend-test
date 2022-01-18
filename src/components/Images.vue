@@ -8,7 +8,7 @@
         @click="$emit('showModal', image)"
       >
         <div class="image-card" :id="`item-${index}`">
-          <img v-bind:src="image['thumb']" />
+          <img v-bind:src="image['regular']" />
           <div class="veil"></div>
           <div class="user-details">
             <h4>{{ image.first_name }} {{ image.last_name }}</h4>
@@ -83,6 +83,7 @@ export default {
 }
 #item-3 {
   bottom: 30%;
+  height: 100%;
 }
 #item-5 {
   bottom: 20%;
