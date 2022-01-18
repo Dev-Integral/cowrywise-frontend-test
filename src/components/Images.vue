@@ -8,7 +8,7 @@
         @click="$emit('showModal', image)"
       >
         <div class="image-card" :id="`item-${index}`">
-          <img v-bind:src="image['small']" />
+          <img v-bind:src="image['thumb']" />
           <div class="veil"></div>
           <div class="user-details">
             <h4>{{ image.first_name }} {{ image.last_name }}</h4>
