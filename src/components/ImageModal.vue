@@ -6,7 +6,7 @@
       </div>
       <transition name="image">
         <div class="img-holder" v-if="show">
-          <img :src="modalData.raw" alt="large" />
+          <img :src="modalData.regular" alt="large" />
         </div>
       </transition>
       <transition name="image" appear>
@@ -39,7 +39,7 @@ export default {
     return { show: false };
   },
   mounted() {
-    setTimeout(() => (this.show = true), 6000);
+    setTimeout(() => (this.show = true), 2000);
   },
   methods: {
     emitClose(){
@@ -107,7 +107,7 @@ export default {
     right: 0;
     background: #898989;
     background-color: rgba(20, 20, 20, 0.7);
-    height: 155vh;
+    height: 255vh;
     z-index: 10;
   }
   &-content {
@@ -240,7 +240,7 @@ export default {
 // RESPONSIVENESS
 @media only screen and (max-width: 767px) {
   .modal-container {
-    height: 200vh;
+    height: 300vh;
 
     .img-holder {
       width: 100%;
@@ -253,9 +253,14 @@ export default {
     }
   }
 }
+@media only screen and (min-width: 400px) {
+  .modal-container{
+    height: 400vh;
+  }
+}
 @media only screen and (max-width: 565px) {
   .modal-container {
-    height: 300vh;
+    height: 450vh;
     .loading-text {
       left: 30%;
     }
