@@ -1,5 +1,5 @@
 <template>
-  <div class="landing-banner-container" v-if="showInputField">
+  <div class="search-banner-container" v-if="showInputField">
     <transition name="slide-in-out">
       <div class="searchbox-holder" v-if="!loading">
         <div class="fa-search-holder"><i class="fa fa-search"></i></div>
@@ -12,7 +12,7 @@
       </div>
     </transition>
   </div>
-  <div v-else class="landing-banner-container">
+  <div v-else class="search-banner-container">
     <transition name="slide-in-out" appear>
     <div class="results">
       <div class="icon-container" @click="defaultState"><i class="fa fa-arrow-left" aria-hidden="true"></i></div>
@@ -53,7 +53,7 @@ export default {
 
 <style lang="scss" scoped>
 @import "../assets/scss/colors";
-.landing {
+.search {
   &-banner-container {
     background: $background;
     display: flex;
@@ -113,7 +113,7 @@ export default {
 }
 @media only screen and (max-width: 565px) {
  
- .landing-banner-container .results{
+ .search-banner-container .results{
         font-size: 20px;
     }
 }
