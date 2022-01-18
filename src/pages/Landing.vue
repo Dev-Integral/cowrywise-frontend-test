@@ -62,6 +62,7 @@ export default {
 
 <style lang="scss">
 // Slide-in-out
+@import '../assets/scss/colors';
 
 .slide-in-out-enter-active {
   animation: wobble 0.5s ease;
@@ -108,7 +109,7 @@ export default {
 
 .landing {
   &-banner-container {
-    background: #dde2e9;
+    background: $background;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -116,7 +117,7 @@ export default {
     .searchbox-holder {
       display: flex;
       align-items: center;
-      background: #fff;
+      background: $white;
       height: 30px;
       width: 80vw;
       padding: 5px 15px;
@@ -126,25 +127,26 @@ export default {
 
       .fa-search-holder {
         margin-right: 10px;
-        color: #dde2e9;
+        color: $background;
       }
       input {
         width: 100%;
+        height: 40px;
         border: none;
         outline: none;
       }
       ::-webkit-input-placeholder {
         /* Edge */
-        color: #253858;
+        color: $primary;
       }
 
       :-ms-input-placeholder {
         /* Internet Explorer 10-11 */
-        color: #253858;
+        color: $primary;
       }
 
       ::placeholder {
-        color: #253858;
+        color: $primary;
         font-weight: bold;
       }
     }

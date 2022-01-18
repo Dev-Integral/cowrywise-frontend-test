@@ -39,7 +39,7 @@ export default {
     return { show: false };
   },
   mounted() {
-    setTimeout(() => (this.show = true), 4000);
+    setTimeout(() => (this.show = true), 6000);
   },
   methods: {
     emitClose(){
@@ -51,8 +51,7 @@ export default {
 </script>
 
 <style lang="scss">
-
-
+@import '../assets/scss/colors';
 .image-enter-from{
   opacity: 0;
   transform: scale(0);
@@ -161,7 +160,7 @@ export default {
     margin: 0;
     text-transform: capitalize;
     padding-left: 60px;
-    color: #253858;
+    color: $primary;
   }
   h3 {
     padding-top: 30px;
@@ -182,7 +181,8 @@ export default {
   }
 }
 .loading-background {
-  background: #ddd;
+  background: $secondary;
+  border-radius: 10px;
 }
 .loading-text {
   position: absolute;
@@ -190,11 +190,12 @@ export default {
   align-items: center;
   top: 35%;
   left: 45%;
-  color: #fff;
+  color: $primary;
   justify-content: center;
 
   p {
     margin-left: 8px;
+    color: $primary;
   }
 }
 
@@ -209,8 +210,8 @@ export default {
   bottom: 0;
   margin: auto;
   border: 4px solid transparent;
-  border-top-color: #eee;
-  border-right-color: #ddd;
+  border-top-color: $primary;
+  border-right-color: $primary;
   border-radius: 50%;
   animation: buttonLoadingSpinner 1s linear infinite;
 }
@@ -222,7 +223,7 @@ export default {
   opacity: 1;
 }
 .modalImage-enter-active {
-  transition: all 2s ease;
+  transition: all 1s ease;
 }
 .modalImage-leave-from {
   opacity: 1;

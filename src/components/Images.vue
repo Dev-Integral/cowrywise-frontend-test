@@ -25,12 +25,10 @@
 
 
 <script>
-// import Loader from './Loader.vue';
 export default {
   name: "Images",
   emits: ["showModal"],
 	props: ["imageList", "loading"],
-	// components: {Loader},
   data() {
     return {  };
   }
@@ -38,6 +36,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '../assets/scss/colors';
 .image-enter-from{
   opacity: 0;
   transform: scale(0.6);
@@ -113,7 +112,7 @@ export default {
     position: absolute;
     bottom: 20px;
     left: 20px;
-    color: #fff;
+    color: $white;
     z-index: 5;
     width: 100%;
   }
