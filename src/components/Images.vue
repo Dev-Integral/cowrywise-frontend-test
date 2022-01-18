@@ -1,6 +1,6 @@
 <template>
 <div>
-  <div class="grid-images">
+  <transition-group class="grid-images" tag="div" name="image" appear>
     <div
       class="item"
       v-for="(image, index) in imageList"
@@ -19,8 +19,7 @@
         </div>
       </div>
     </div>
-  </div>
-	
+  </transition-group>	
 </div>
 </template>
 
@@ -39,6 +38,27 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.image-enter-from{
+  opacity: 0;
+  transform: scale(0.6);
+}
+.image-enter-to{
+  opacity: 1;
+  transform: scale(1);  
+}
+.image-enter-active{
+  transition: all 1s ease;
+}
+.image-leave-from{
+  opacity: 1;
+}
+.image-leave-to{
+  opacity: 0;
+}
+.image-leave-active{
+  transition: all 1s ease;
+}
+
 .grid-images {
   display: grid;
   grid-template-columns: 2fr 2fr 1fr;

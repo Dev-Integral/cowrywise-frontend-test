@@ -1,26 +1,32 @@
 <template>
   <div class="modal-container">
     <div class="modal-content" v-bind:class="{ hide: !show }">
-      <div class="close-icon" @click="$emit('close')">
+      <div class="close-icon" @click="emitClose">
         <i class="fa fa-times"></i>
       </div>
-      <div class="img-holder">
-        <img :src="modalData.raw" alt="large" />
-      </div>
-      <div class="details">
-        <h3>{{ modalData.first_name }} {{ modalData.last_name }}</h3>
-        <p>{{ modalData.location }}</p>
-      </div>
-    </div>
-    <div class="modal-content" v-bind:class="{ hide: show }">
-      <div class="img-holder loading-background">
-        <div class="loading-text">
-          <p>Please wait</p>
-          <div v-bind:class="{ loading: !show }"></div>
+      <transition name="image">
+        <div class="img-holder" v-if="show">
+          <img :src="modalData.raw" alt="large" />
         </div>
-      </div>
-      <div class="details"></div>
+      </transition>
+      <transition name="image" appear>
+        <div class="details" v-if="show">
+          <h3>{{ modalData.first_name }} {{ modalData.last_name }}</h3>
+          <p>{{ modalData.location }}</p>
+        </div>
+      </transition>
     </div>
+    <transition name="modalImage" appear>
+      <div v-if="!show" class="modal-content" v-bind:class="{ hide: show }">
+        <div class="img-holder loading-background">
+          <div class="loading-text">
+            <p>Please wait</p>
+            <div v-bind:class="{ loading: !show }"></div>
+          </div>
+        </div>
+        <div class="details"></div>
+      </div>
+    </transition>
   </div>
 </template>
 
@@ -33,12 +39,63 @@ export default {
     return { show: false };
   },
   mounted() {
-    setTimeout(() => (this.show = true), 5000);
+    setTimeout(() => (this.show = true), 4000);
   },
+  methods: {
+    emitClose(){
+      this.show = false;
+      this.$emit('close');
+    }
+  }
 };
 </script>
 
 <style lang="scss">
+
+
+.image-enter-from{
+  opacity: 0;
+  transform: scale(0);
+}
+.image-enter-to{
+  opacity: 1;
+  transform: scale(1);  
+}
+.image-enter-active{
+  transition: all 1s ease;
+}
+.image-leave-from{
+  opacity: 1;
+}
+.image-leave-to{
+  opacity: 0;
+}
+.image-leave-active{
+  transition: all 1s ease;
+}
+.scaleUp-enter-from {
+  opacity: 0;
+  transform: scale(0.5);
+}
+.scaleUp-enter-to {
+  opacity: 1;
+  transform: scale(1);
+}
+.scaleUp-enter-active {
+  transform: all 1s ease;
+}
+.scaleUp-leave-from {
+  opacity: 1;
+  // transform: scale(1);
+}
+.scaleUp-leave-to {
+  opacity: 0;
+  // transform: scale(0.5);
+}
+.scaleUp-leave-active {
+  transition: all 1s ease;
+}
+
 .hide {
   display: none;
 }
@@ -157,6 +214,29 @@ export default {
   border-radius: 50%;
   animation: buttonLoadingSpinner 1s linear infinite;
 }
+// TRANSITION
+.modalImage-enter-from {
+  opacity: 0;
+}
+.modalImage-enter-to {
+  opacity: 1;
+}
+.modalImage-enter-active {
+  transition: all 2s ease;
+}
+.modalImage-leave-from {
+  opacity: 1;
+}
+.modalImage-leave-to {
+  opacity: 0;
+}
+.modalImage-leave-active {
+  transition: all 1s ease;
+}
+
+
+
+// RESPONSIVENESS
 @media only screen and (max-width: 767px) {
   .modal-container {
     height: 200vh;
@@ -164,7 +244,7 @@ export default {
     .img-holder {
       width: 100%;
     }
-    .details{
+    .details {
       width: 100%;
     }
     .loading-text {
@@ -178,8 +258,9 @@ export default {
     .loading-text {
       left: 30%;
     }
-    .details{
-      p, h3{
+    .details {
+      p,
+      h3 {
         padding-left: 20px;
       }
     }

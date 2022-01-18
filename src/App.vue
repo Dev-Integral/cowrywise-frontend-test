@@ -30,8 +30,8 @@ export default {
         : null;
     },
     async getList(link) {
-      this.loading = false;
-      console.log(process.env.VUE_APP_ACCESS_KEY);
+      this.loading = true;
+
       await axios
         .create({
           headers: {
@@ -58,6 +58,7 @@ export default {
             });
           }
           this.imageList = initialData;
+          this.loading = false;
           return this.imageList;
         })
         .catch(() => {
