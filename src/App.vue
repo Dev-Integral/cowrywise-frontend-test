@@ -27,7 +27,7 @@ export default {
     searchTextFxn(text) {
       return text
         ? this.getList(`https://api.unsplash.com/search/photos?&query=${text}`)
-        : null;
+        : this.getList(`https://api.unsplash.com/search/photos?&query=african`);
     },
     async getList(link) {
       this.loading = true;

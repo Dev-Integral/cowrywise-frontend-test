@@ -1,17 +1,5 @@
 <template>
-  <div class="landing-banner-container">
-    <transition name="slide-in-out">
-      <div class="searchbox-holder" v-if="!loading">
-        <div class="fa-search-holder"><i class="fa fa-search"></i></div>
-        <input
-          type="text"
-          placeholder="Search for photo"
-          @change="searchTerm"
-          v-model="searchText"
-        />
-      </div>
-    </transition>
-  </div>
+  <Search :loading="loading" v-on:searchTerm="searchTerm" />
   <div v-if="imageList && !loading">
     <Images
       v-on:showModal="imageData"
@@ -35,15 +23,15 @@
 import Images from "../components/Images.vue";
 import ImageModal from "../components/ImageModal.vue";
 import Loader from "../components/Loader.vue";
+import Search from "../components/Search.vue";
 
 export default {
   name: "Landing",
   emits: ["searchTerm"],
   props: ["imageList", "loading"],
-  components: { Images, ImageModal, Loader },
+  components: { Images, ImageModal, Loader, Search },
   data() {
     return {
-      searchText: "",
       showModal: false,
       modalData: {},
     };
@@ -53,8 +41,9 @@ export default {
       this.modalData = data;
       this.showModal = true;
     },
-    searchTerm() {
-      this.$emit("searchTerm", this.searchText);
+    searchTerm(term) {
+      console.log(term)
+      this.$emit("searchTerm", term);
     },
   },
 };
@@ -102,54 +91,6 @@ export default {
   }
   100% {
     transform: translateX(0);
-  }
-}
-// scale-up-down
-
-
-.landing {
-  &-banner-container {
-    background: $background;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 200px;
-    .searchbox-holder {
-      display: flex;
-      align-items: center;
-      background: $white;
-      height: 30px;
-      width: 80vw;
-      padding: 5px 15px;
-      border-radius: 8px;
-      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.05),
-        0 6px 20px 0 rgba(0, 0, 0, 0.005);
-
-      .fa-search-holder {
-        margin-right: 10px;
-        color: $background;
-      }
-      input {
-        width: 100%;
-        height: 40px;
-        border: none;
-        outline: none;
-      }
-      ::-webkit-input-placeholder {
-        /* Edge */
-        color: $primary;
-      }
-
-      :-ms-input-placeholder {
-        /* Internet Explorer 10-11 */
-        color: $primary;
-      }
-
-      ::placeholder {
-        color: $primary;
-        font-weight: bold;
-      }
-    }
   }
 }
 </style>
